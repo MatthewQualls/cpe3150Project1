@@ -1,0 +1,5 @@
+# Editors & Environment
+
+*.uvproj
+*.uvopt
+*.uvgui.*
