@@ -1,6 +1,6 @@
 # Editors & Environment
-.Listings/
-.Objects/
+Listings/
+Objects/
 
 *.uvproj
 *.uvopt
