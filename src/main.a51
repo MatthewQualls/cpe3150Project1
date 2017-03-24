@@ -85,13 +85,13 @@ FS4:	DJNZ R1, done
 		JMP done
 done:   RET
 		
-F1:     ;funct1
+F1:     ;funct1 Tim Regan
 		RET
-F2:     ;funct2
+F2:     ;funct2 Blake Patornum
 		RET
-F3:     ;funct3
+F3:     ;funct3 Matthew Qualls
 		RET
-F4:     ;funct4
+F4:     ;funct4 Myles Hammerdude
 		RET
 		
 		END	
