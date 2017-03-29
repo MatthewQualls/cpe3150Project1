@@ -87,7 +87,16 @@ done:   RET
 		
 F1:     ;funct1 Tim Regan
 		RET
-F2:     ;funct2 Blake Patornum
+F2:     MOV A,#0F0H ;move value f0 to reg A
+		MOV P2, A ; turns on lights aligned to port2 and lets the buttons accept input
+		MOV A,#70H; selects all leds except the p.7 one
+		MOV P0, A ; turns on lights aligned to port 1 and lets buttons take input
+		SETB P1.6 ; turns middle light on and button to take input
+		CLR P1.4
+		
+CHECK:		
+		LJMP CHECK 
+		;funct2 Blake Patornum
 		RET
 F3:     ;funct3 Matthew Qualls
 		RET
