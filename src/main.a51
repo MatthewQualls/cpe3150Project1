@@ -87,7 +87,9 @@ done:   RET
 		
 F1:     ;funct1 Tim Regan
 		RET
-F2:     MOV A,#0F0H ;move value f0 to reg A
+F2:     
+		LCALL NOISE
+		MOV A,#0F0H ;move value f0 to reg A
 		MOV P2, A ; turns on lights aligned to port2 and lets the buttons accept input
 		MOV A,#70H; selects all leds except the p.7 one
 		MOV P0, A ; turns on lights aligned to port 1 and lets buttons take input
@@ -95,9 +97,47 @@ F2:     MOV A,#0F0H ;move value f0 to reg A
 		CLR P1.4
 		
 CHECK:		
+		MOV C, P2.0
+		JNC ON
+		CLR P2.4
+		NOISE:
+ON:		MOV C,P0.1
+		JNC ON1
+		CLR P0.5
+		NOISE:
+ON1:	MOV C, P2.3
+		JNC ON2
+		CLR P2.7
+		NOISE:
+ON2:	MOV C, P0.2
+		JNC ON3
+		CLR P0.6
+		NOISE:
+ON3:	MOV C, P1.4
+		JNC ON4
+		CLR P1.6
+		NOISE:
+ON4:	MOV C, P0.0
+		JNC ON5
+		CLR P0.4
+		NOISE:
+ON5:	MOV C, P2.1
+		JNC ON6
+		CLR P2.5
+		NOISE:
+ON6:	MOV C, P2.2
+		JNC ON7
+		CLR P2.6
+		NOISE:
+ON7:	MOV C, P0.3
+		JNC EXIT
 		LJMP CHECK 
+		EXIT:
+		NOISE:
+		;  for once i learn hwo to make a speaker sound
 		;funct2 Blake Patornum
 		RET
+
 F3:     ;funct3 Matthew Qualls
 		RET
 F4:     ;funct4 Myles Hammerdude
