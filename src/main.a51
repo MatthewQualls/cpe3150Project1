@@ -132,8 +132,17 @@ ON6:	MOV C, P2.2
 ON7:	MOV C, P0.3
 		JNC EXIT
 		LJMP CHECK 
-		NOISE:
-		;  for once i learn hwo to make a speaker sound
+		NOISE:	
+		MOV R3, #32
+LOOP3:	MOV R2, #32
+LOOP2:	MOV R1, #32
+LOOP1:	MOV R4, #32
+LOOP0:	DJNZ R4, LOOP0
+		DJNZ R1, LOOP1
+		CPL p1.7 
+		DJNZ R2, LOOP2
+		DJNZ R3, LOOP3
+		RET
 		EXIT:
 		;funct2 Blake Patornum
 		RET
