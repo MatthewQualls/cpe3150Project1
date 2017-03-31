@@ -95,15 +95,19 @@ DONE:   RET
 		
 		
 F1:     ;funct1 Tim Regan
+		LCALL CLEAR
 		LCALL TEMP
 		RET
 F2:     ;funct2 Blake Patornum
+		LCALL CLEAR
 		LCALL TEMP
 		RET
 F3:     ;funct3 Matthew Qualls
+		LCALL CLEAR
 		LCALL TEMP
 		RET
 F4:     ;funct4 Myles Hammerdude
+		LCALL CLEAR
 		LCALL TEMP
 		RET
 		
@@ -137,6 +141,12 @@ L: 		NOP
 		DJNZ R7, L
 		DJNZ R6, R
 		DJNZ R5, H
+		RET
+		
+CLEAR:	SETB P0.6
+		SETB P2.4
+		SETB P0.5
+		SETB P2.7
 		RET
 		
 TEMP:	CLR P1.6
