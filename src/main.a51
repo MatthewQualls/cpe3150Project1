@@ -1,5 +1,5 @@
 
-		ORG 250H	
+		ORG 400H	
 		  ;0  1  2  3  4  5  6  7  8  9 10 11 12 13 14 15
 TABLE: 	DB 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0, 0, 0, 0
 		
@@ -97,7 +97,7 @@ FS:		;Function Select based on R0
 		MOVC A, @A+DPTR
 		
 		JZ INVALID;
-		Mov R1, A
+		MOV R1, A
 FS1:	DJNZ R1, FS2
 		ACALL F1
 		JMP done
@@ -203,6 +203,7 @@ FIN1:	JNC FIN
 FIN:	ACALL CLEAR
 		RET
 		
+		
 F2:     ;funct2 Blake Patornum
 		ACALL CLEAR
 		
@@ -276,9 +277,80 @@ EXIT:	ACALL SOUND2
 		
 F3:     ;funct3 Matthew Qualls
 		ACALL CLEAR
-		ACALL TEMP
+		
+		;BEGIN MATHEW'S PROGRAM -----------------------------------------------
+		
+		SHOW1:	MOV R1, #08;
+
+SHOW1A: ;lightshow 1 time
+		ACALL DELAY
+		DJNZ R1, ULS1 ; if r1 == 0, roll over r1 to 8
+		MOV R1, #08;
+ULS1: 	; Update Light Show 1
+		
+		MOV A, R1
+		MOV R2, A
+; first number following tag is lightshow number
+; second number following tag is to check if R1 == second num
+TAG11:	DJNZ R2, TAG12 
+		ACALL CLEAR
+		CLR P2.4
+		CLR P0.5
+		JMP CHKXT
+		
+TAG12:  DJNZ R2, TAG13
+		ACALL CLEAR
+		CLR P2.4
+		CLR P0.6
+		JMP CHKXT
+		
+TAG13:  DJNZ R2, TAG14
+		ACALL CLEAR
+		CLR P2.5
+		CLR P0.6
+		JMP CHKXT
+		
+TAG14:  DJNZ R2, TAG15
+		ACALL CLEAR
+		CLR P2.5
+		CLR P0.7
+		JMP CHKXT
+		
+TAG15:  DJNZ R2, TAG16
+		ACALL CLEAR
+		CLR P2.6
+		CLR P0.7
+		JMP CHKXT
+		
+TAG16:  DJNZ R2, TAG17
+		ACALL CLEAR
+		CLR P2.6
+		CLR P0.4
+		JMP CHKXT
+		
+TAG17:  DJNZ R2, TAG18
+		ACALL CLEAR
+		CLR P2.7
+		CLR P0.4
+		JMP CHKXT
+		
+TAG18:  ACALL CLEAR
+		CLR P2.7
+		CLR P0.5
+
+CHKXT:	;Check Exit switch 3
+		MOV C, P0.3; Check if switch 3 is pressed
+		;MOV P0.7, C; Light 3 on if switch 3 pressed
+		JNC SHOW1A; Jump to beginning of this function if switch 3 pressed
+		ACALL DELAY
+		
+		;END F3 -----------------------------------------------------------
+		
 		ACALL CLEAR
 		RET
+		
+SHOW1B: LJMP SHOW1A
+		
 F4:     ;funct4 Myles Hammerdude
 		ACALL CLEAR
 		ACALL TEMP
